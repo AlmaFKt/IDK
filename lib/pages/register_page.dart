@@ -1,31 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:flutter_application_2/components/My_Button.dart';
+import 'package:flutter_application_2/components/TextField.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../components/MyButton.dart';
-import '../components/MyTextfield.dart';
+import 'login_page.dart';
 
-class LoginPage extends StatelessWidget {
-  LoginPage({super.key});
+class RegisterPage extends StatelessWidget {
+  //we copied the one from the login page, so we can do some changes
+  RegisterPage({super.key});
 
   //Text editing controllers
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
+  final confirmPasController = TextEditingController(); //we added this 2 TextEd
+  final emailController = TextEditingController();
 
-  //sign user in method event
-  void signUserIn() {}
+  //register user in method event
+  void registerUserIn() {}
 
   @override
   Widget build(BuildContext context) {
-    //print(Get.arguments);
-    int x = Get.find(tag: 'dato');
-    print(x);
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
-      appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 85, 52, 68),
-        elevation: 0, // Set elevation to 0 to remove the shadow
-      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Center(
@@ -40,7 +36,7 @@ class LoginPage extends StatelessWidget {
                   children: [
                     Image.asset(
                       'lib/Images/catLogo.webp',
-                      height: 180,
+                      height: 160,
                       width: 250,
                     ),
                   ],
@@ -51,15 +47,15 @@ class LoginPage extends StatelessWidget {
                 Text('PlodCat', style: GoogleFonts.lobsterTwo(fontSize: 38)),
 
                 const SizedBox(
-                  height: 20,
+                  height: 12,
                   width: 20,
                 ),
 
                 //(Welcome!) text
-                Text('Welcome back!', style: GoogleFonts.heebo(fontSize: 20)),
+                Text('Join us!', style: GoogleFonts.heebo(fontSize: 20)),
 
                 const SizedBox(
-                  height: 20,
+                  height: 15,
                   width: 20,
                 ), // this makes a type of space betweeno your objects
 
@@ -71,7 +67,18 @@ class LoginPage extends StatelessWidget {
                 ), // u can find the code for this object in components
 
                 const SizedBox(
-                  height: 12,
+                  height: 13,
+                  width: 20,
+                ),
+
+                MyTextField(
+                  controller: emailController,
+                  hintText: 'Email',
+                  obscureText: false,
+                ), // u can find the code for this object in components
+
+                const SizedBox(
+                  height: 13,
                   width: 20,
                 ),
 
@@ -83,44 +90,53 @@ class LoginPage extends StatelessWidget {
                 ),
 
                 const SizedBox(
-                  height: 12,
+                  height: 13,
                   width: 20,
                 ),
+
+                MyTextField(
+                  controller: confirmPasController,
+                  hintText: 'Password confirm',
+                  obscureText: true,
+                ),
+
+                /* const SizedBox(
+                height: 12,
+                width: 20,
+              ), */
 
                 //forgot password TEXT (In a row)
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                  child: Row(
-                    //we wrap it into a row so it isn't on the center
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Text(
-                        '¿Olvidaste tu contraseña?',
-                        style:
-                            TextStyle(color: Color.fromARGB(255, 97, 81, 180)),
-                      ),
-                    ],
-                  ),
+
+                /* Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                child: Row(
+                  //we wrap it into a row so it isn't on the center
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Text(
+                      '¿Olvidaste tu contraseña?',
+                      style: TextStyle(color: Color.fromARGB(255, 97, 81, 180)),
+                    ),
+                  ],
                 ),
+              ), */
 
                 const SizedBox(
-                  height: 32,
-                  width: 20,
+                  height: 25,
                 ),
 
-                //log in button
                 //log in button
                 MyButton(
-                  text: 'Log In', // Add the text parameter for the button
-                  onTap: signUserIn,
+                  text: 'Register', // Add the text parameter for the button
+                  onTap: registerUserIn,
                 ),
 
                 const SizedBox(
-                  height: 32,
+                  height: 25,
                   width: 20,
                 ),
 
-                //Dont have an account? Register now
+                //already have an account? Register now
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25.0),
                   child: Row(
@@ -134,7 +150,7 @@ class LoginPage extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 10.0),
                         child: Text(
-                          'Not a PlodCat user?',
+                          'Already a PlodCat user?',
                           style:
                               TextStyle(color: Color.fromARGB(183, 66, 66, 66)),
                         ),
@@ -150,13 +166,13 @@ class LoginPage extends StatelessWidget {
                 ),
 
                 const SizedBox(
-                  height: 32,
+                  height: 20,
                   width: 20,
                 ),
 
                 //Register now text
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 170.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 180.0),
                   child: Expanded(
                     child: Divider(
                       thickness: 0.4,
@@ -165,33 +181,34 @@ class LoginPage extends StatelessWidget {
                   ),
                 ),
 
-                //GestureDetector(
-                //onTap: () {
-                // Navigate to the register page
-                //Navigator.push(
-                //context,
-                //MaterialPageRoute(
-                //builder: (context) =>
-                //RegisterPage(), // Replace with your RegisterPage widget
-                //),
-                //);
-                //},
-                //child: Text(
-                //'Register now',
-                //style: GoogleFonts.robotoSlab(
-                //fontSize: 15,
-                //textStyle:
-                //  TextStyle(color: Color.fromARGB(255, 120, 109, 223)),
-                //),
-                //),
-                //),
+                GestureDetector(
+                  onTap: () {
+                    // Navigate to the logIn page
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            LoginPage(), 
+                      ),
+                    );
+                  },
+                  //GestureD is for making everythin that its inside a button
+                  child: Text(
+                    "Sign in",
+                    style: GoogleFonts.robotoSlab(
+                      fontSize: 15,
+                      textStyle:
+                          TextStyle(color: Color.fromARGB(255, 66, 48, 224)),
+                    ),
+                  ),
+                ),
 
                 const SizedBox(
                   height: 5,
                 ),
 
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 170.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 180.0),
                   child: Expanded(
                     child: Divider(
                       thickness: 0.4,
